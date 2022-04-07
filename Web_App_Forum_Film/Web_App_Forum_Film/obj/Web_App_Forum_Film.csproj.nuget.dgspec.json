@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ghilardi.17186\\source\\repos\\Web_App_Forum_Film\\Web_App_Forum_Film\\Web_App_Forum_Film.csproj": {}
+    "C:\\Users\\ghilardi.17186\\source\\repos\\Forum_Film\\Web_App_Forum_Film\\Web_App_Forum_Film\\Web_App_Forum_Film.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ghilardi.17186\\source\\repos\\Web_App_Forum_Film\\Web_App_Forum_Film\\Web_App_Forum_Film.csproj": {
+    "C:\\Users\\ghilardi.17186\\source\\repos\\Forum_Film\\Web_App_Forum_Film\\Web_App_Forum_Film\\Web_App_Forum_Film.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ghilardi.17186\\source\\repos\\Web_App_Forum_Film\\Web_App_Forum_Film\\Web_App_Forum_Film.csproj",
+        "projectUniqueName": "C:\\Users\\ghilardi.17186\\source\\repos\\Forum_Film\\Web_App_Forum_Film\\Web_App_Forum_Film\\Web_App_Forum_Film.csproj",
         "projectName": "Web_App_Forum_Film",
-        "projectPath": "C:\\Users\\ghilardi.17186\\source\\repos\\Web_App_Forum_Film\\Web_App_Forum_Film\\Web_App_Forum_Film.csproj",
+        "projectPath": "C:\\Users\\ghilardi.17186\\source\\repos\\Forum_Film\\Web_App_Forum_Film\\Web_App_Forum_Film\\Web_App_Forum_Film.csproj",
         "packagesPath": "C:\\Users\\ghilardi.17186\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ghilardi.17186\\source\\repos\\Web_App_Forum_Film\\Web_App_Forum_Film\\obj\\",
+        "outputPath": "C:\\Users\\ghilardi.17186\\source\\repos\\Forum_Film\\Web_App_Forum_Film\\Web_App_Forum_Film\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -49,19 +49,33 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.4, )"
+              "version": "[5.0.15, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[5.0.4, )"
+              "version": "[5.0.15, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[5.0.4, )"
+              "version": "[5.0.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[5.0.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite.Core": {
+              "target": "Package",
+              "version": "[5.0.15, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.4, )"
+              "version": "[5.0.15, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[5.0.2, )"
             }
           },
           "imports": [

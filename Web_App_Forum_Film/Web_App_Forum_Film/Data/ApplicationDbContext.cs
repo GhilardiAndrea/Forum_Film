@@ -3,12 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Web_App_Forum_Film.Areas.Identity;
 
 namespace Web_App_Forum_Film.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class MyIdentityDbContext : IdentityDbContext<MyUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public MyIdentityDbContext(DbContextOptions<MyIdentityDbContext> options)
             : base(options)
         {
         }

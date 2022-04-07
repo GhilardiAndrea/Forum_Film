@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Web_App_Forum_Film.Areas.Identity;
 using Web_App_Forum_Film.Data;
 
 namespace Web_App_Forum_Film
@@ -27,12 +28,12 @@ namespace Web_App_Forum_Film
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<MyIdentityDbContext>(options =>
+                options.UseSqlite(
+                    Configuration.GetConnectionString("Identity")));
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<MyUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddEntityFrameworkStores<MyIdentityDbContext>();
             services.AddRazorPages();
         }
 
