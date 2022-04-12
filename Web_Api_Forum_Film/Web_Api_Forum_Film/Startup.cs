@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Web_Api_Forum_Film.Data;
 
 namespace Web_Api_Forum_Film
 {
@@ -26,12 +28,18 @@ namespace Web_Api_Forum_Film
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<MyDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("MyDb")));
+
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Web_Api_Forum_Film", Version = "v1" });
             });
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
