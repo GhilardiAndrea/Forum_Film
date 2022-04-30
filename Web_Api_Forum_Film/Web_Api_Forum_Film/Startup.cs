@@ -13,6 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Web_Api_Forum_Film.Data;
+using Web_Api_Forum_Film.Services;
 
 namespace Web_Api_Forum_Film
 {
@@ -31,7 +32,7 @@ namespace Web_Api_Forum_Film
             services.AddDbContext<MyDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("MyDb")));
 
-
+            services.AddScoped<IMyService, MyService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

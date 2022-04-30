@@ -2,10 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Web_Api_Forum_Film.Services.Class;
+using Web_Api_Forum_Film.Services.Class.Dtos;
 
 namespace Web_Api_Forum_Film.Services
 {
-    interface IMyService
+    public interface IMyService
     {
+        public Task<ResponsePosts> GetAllPostInTopic(int topicId);
+
+        public Task<ResponseTopics> GetTopicsFromName(string name);
+
+        public Task<ResponsePosts> GetAllPostOfUser(int userId);
+
+        public Task<ResponseFilms> GetAllFilm();
+
+
+        public Task<ResponsePostPost> PostPost(RequestPost request);
+
+        public Task<ResponsePostTopic> PostTopic(RequestTopic request);
+
+        public Task<ResponsePostFilm> PostFilm(RequestFilm request);
+
     }
 }
