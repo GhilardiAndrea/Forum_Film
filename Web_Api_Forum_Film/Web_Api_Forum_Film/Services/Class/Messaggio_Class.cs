@@ -22,6 +22,6 @@ namespace Web_Api_Forum_Film.Services.Class
         public DateTime Data_Creazione { get; set; }
 
         [Required]
-        public int Id_Post;
+        public ForumPost Id_Post;
     }
 }

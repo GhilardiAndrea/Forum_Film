@@ -9,8 +9,8 @@ using Web_Api_Forum_Film.Data;
 namespace Web_Api_Forum_Film.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220412094301_Intial")]
-    partial class Intial
+    [Migration("20220502121623_prima")]
+    partial class prima
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
