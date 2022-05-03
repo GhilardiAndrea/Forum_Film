@@ -24,5 +24,7 @@ namespace Web_Api_Forum_Film.Services
 
         public Task<ResponsePostFilm> PostFilm(RequestFilm request);
 
+        public Task<ResponsePostMessaggio> PostMessaggio(RequestMessaggio request);
+
     }
 }

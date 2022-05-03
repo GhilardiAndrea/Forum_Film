@@ -15,7 +15,7 @@ namespace Web_Api_Forum_Film.Services.Class.Dtos
         public int IdTopic { get; set; }
 
         [Required]
-        public string FirstMessage { get; set; }
+        public string Message { get; set; }
     }
 
     public class RequestTopic
@@ -32,5 +32,17 @@ namespace Web_Api_Forum_Film.Services.Class.Dtos
     {
         [Required]
         public string Titolo { get; set; }
+    }
+
+    public class RequestMessaggio
+    {
+        [Required]
+        public string Messaggio { get; set; }
+
+        [Required]
+        public int IdPost { get; set; }
+
+        [Required]
+        public int IdUser { get; set; }
     }
 }

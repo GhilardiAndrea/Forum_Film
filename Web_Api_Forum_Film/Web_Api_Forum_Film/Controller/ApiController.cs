@@ -77,6 +77,12 @@ namespace Web_Api_Forum_Film.Controller
             return await _myservice.PostFilm(request);
         }
 
+        [HttpPost("messaggio")]
+        public async Task<ResponsePostMessaggio> PostMessaggio([FromBody] RequestMessaggio request)
+        {
+            return await _myservice.PostMessaggio(request);
+        }
+
         #endregion
 
 

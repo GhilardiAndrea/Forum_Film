@@ -42,4 +42,9 @@ namespace Web_Api_Forum_Film.Services.Class.Dtos
     {
         public Film Film { get; set; }
     }
+
+    public class ResponsePostMessaggio : ResponseBase
+    {
+        public Messaggio_Class Messaggio { get; set; }
+    }
 }
