@@ -109,10 +109,17 @@ namespace Web_Api_Forum_Film.Controller
         #endregion
 
 
+        #region Deletes
+
         // DELETE api/<MyController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("Deletepost/id")]
+        public async Task<ResponsePostPost> Delete(int id)
         {
+            return await _myservice.DeletePost(id);
         }
+
+        #endregion
+
+
     }
 }

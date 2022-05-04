@@ -33,5 +33,10 @@ namespace Web_Api_Forum_Film.Services
 
         public Task<ResponsePostTopic> PutTopic(RequestPutTopic request);
 
+
+        public Task<ResponsePostPost> DeletePost(int id);
+
+        public Task<ResponsePostTopic> DeleteTopic(int id);
+
     }
 }

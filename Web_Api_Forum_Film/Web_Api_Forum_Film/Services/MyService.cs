@@ -164,6 +164,7 @@ namespace Web_Api_Forum_Film.Services
                 
                 messaggio.User = await _context.Users.FirstOrDefaultAsync(u => u.Id == request.IdUser);
                 messaggio.Messaggio = request.Messaggio;
+                messaggio.Data_Creazione = DateTime.Now;
                 await (from p in _context.Posts
                        select new
                        {
@@ -222,7 +223,7 @@ namespace Web_Api_Forum_Film.Services
                     {
                         User = post.User,
                         Messaggio = request.Message,
-                        Data_Creazione = DateTime.Now.Date
+                        Data_Creazione = DateTime.Now
                     }
                 };
                 
@@ -373,6 +374,59 @@ namespace Web_Api_Forum_Film.Services
 
 
         #endregion
+
+        public async Task<ResponsePostPost> DeletePost(int id)
+        {
+            ResponsePostPost response = new ResponsePostPost();
+
+            var post = await _context.Posts.FirstOrDefaultAsync(p => p.Id == id);
+            if(post == null)
+            {
+                response.Success = false;
+                response.Post = null;
+                response.Errors = new List<string>() { "Nessun post trovato con quell'id" };
+
+                return response;
+            }
+            await (from p in _context.Posts
+                   select new
+                   {
+                       p.Id,
+                       p.Topic,
+                       p.User,
+                       p.Messaggi
+                   }).ToListAsync();
+
+            foreach( Messaggio_Class messaggio in post.Messaggi )
+            {                
+                _context.Messaggi.Remove(messaggio);
+            }
+
+            _context.Posts.Remove(post);
+            await _context.SaveChangesAsync();
+
+            response.Success = true;
+            response.Post = post;
+            response.Errors = null;
+
+            return response;
+        }
+
+        public async Task<ResponsePostTopic> DeleteTopic(int id)
+        {
+            ResponsePostTopic response = new ResponsePostTopic();
+
+            var topic = await _context.Topics.FirstOrDefaultAsync(t => t.Id == id);
+            if (topic == null)
+            {
+                response.Success = false;
+                response.Topic = null;
+                response.Errors = new List<string>() { "Nessun post trovato con quell'id" };
+
+                return response;
+            }
+            
+        }
     }
 
 }
