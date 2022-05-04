@@ -53,6 +53,12 @@ namespace Web_Api_Forum_Film.Controller
             return await _myservice.GetTopicsFromName(name);
         }
 
+        [HttpGet("film/{name}")]
+        public async Task<ResponseFilms> GetFilmsFromName(string name)
+        {
+            return await _myservice.GetFilmsFromName(name);
+        }
+
 
         #endregion
 
@@ -86,12 +92,22 @@ namespace Web_Api_Forum_Film.Controller
         #endregion
 
 
-
+        #region Puts
         // PUT api/<MyController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("messaggio")]
+        public async Task<ResponsePostMessaggio> PutMessaggio([FromBody] RequestPutMessaggio request)
         {
+            return await _myservice.PutMessaggio(request);
         }
+
+        [HttpPut("topic")]
+        public async Task<ResponsePostTopic> PutTopic([FromBody] RequestPutTopic request)
+        {
+            return await _myservice.PutTopic(request);
+        }
+
+        #endregion
+
 
         // DELETE api/<MyController>/5
         [HttpDelete("{id}")]

@@ -45,4 +45,25 @@ namespace Web_Api_Forum_Film.Services.Class.Dtos
         [Required]
         public int IdUser { get; set; }
     }
+
+
+    public class RequestPutMessaggio
+    {
+        [Required]
+        public string Messaggio { get; set; }
+
+        [Required]
+        public int IdMessaggio { get; set; }
+
+    }
+    public class RequestPutTopic
+    {
+        [Required]
+        public string Titolo { get; set; }
+
+        [Required]
+        public int IdTopic { get; set; }
+
+    }
+
 }

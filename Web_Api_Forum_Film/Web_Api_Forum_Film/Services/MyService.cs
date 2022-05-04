@@ -17,6 +17,8 @@ namespace Web_Api_Forum_Film.Services
             _context = context;
         }
 
+        #region Gets
+
         public async Task<ResponseFilms> GetAllFilm()
         {
             ResponseFilms response = new ResponseFilms();
@@ -88,6 +90,33 @@ namespace Web_Api_Forum_Film.Services
             return response;
         }
 
+        public async Task<ResponseFilms> GetFilmsFromName(string name)
+        {
+            ResponseFilms response = new ResponseFilms();
+            name = name.Trim().ToLower();
+            var lista = await _context.Films.Where(f => f.Titolo.ToLower().StartsWith(name)).ToListAsync();
+            await(from f in _context.Films
+                  select new
+                  {
+                      f.Id,
+                      f.Titolo
+                  }).ToListAsync();
+
+            if (lista == null)
+            {
+                response.List = null;
+                response.Errors = new List<string>() { "Non sono stati trovati film col nome selezionato" };
+                response.Success = false;
+            }
+            else
+            {
+                response.List = lista;
+                response.Errors = null;
+                response.Success = true;
+            }
+            return response;
+        }
+
         public async Task<ResponseTopics> GetTopicsFromName(string name)
         {
             ResponseTopics response = new ResponseTopics();
@@ -116,6 +145,9 @@ namespace Web_Api_Forum_Film.Services
             return response;
         }
 
+        #endregion
+
+        #region Posts
         public async Task<ResponsePostFilm> PostFilm(RequestFilm request)
         {
             throw new NotImplementedException();
@@ -128,7 +160,8 @@ namespace Web_Api_Forum_Film.Services
             Messaggio_Class messaggio = new Messaggio_Class();
             try
             {
-                messaggio.Id_Post = await _context.Posts.FirstOrDefaultAsync(p=>p.Id == request.IdPost);
+                var post = await _context.Posts.FirstOrDefaultAsync(p=>p.Id == request.IdPost);
+                
                 messaggio.User = await _context.Users.FirstOrDefaultAsync(u => u.Id == request.IdUser);
                 messaggio.Messaggio = request.Messaggio;
                 await (from p in _context.Posts
@@ -139,7 +172,7 @@ namespace Web_Api_Forum_Film.Services
                            p.User,
                            p.Messaggi
                        }).ToListAsync();
-                if (messaggio.Id_Post == null || messaggio.User == null)
+                if (messaggio.User == null)
                 {
                     response.Messaggio = null;
                     response.Errors = new List<string>() { "ID dell'User o del post non validi" };
@@ -147,7 +180,7 @@ namespace Web_Api_Forum_Film.Services
 
                     return response;
                 }
-
+                post.Messaggi.Add(messaggio);
                 await _context.Messaggi.AddAsync(messaggio);
                 await _context.SaveChangesAsync();
             }
@@ -248,6 +281,98 @@ namespace Web_Api_Forum_Film.Services
 
             return response;
         }
+
+
+
+        #endregion
+
+        #region Puts
+        public async Task<ResponsePostMessaggio> PutMessaggio(RequestPutMessaggio request)
+        {
+            ResponsePostMessaggio response = new ResponsePostMessaggio();
+            try
+            {
+                var messaggio = await _context.Messaggi.FirstOrDefaultAsync(m => m.Id == request.IdMessaggio);
+
+                if (messaggio == null)
+                {
+                    response.Messaggio = null;
+                    response.Success = false;
+                    response.Errors = new List<string>() { "Messaggio non trovato" };
+
+                    return response;
+                }
+
+                messaggio.Messaggio = request.Messaggio;
+
+                await (from m in _context.Messaggi
+                       select new
+                       {
+                          m.Id,
+                          m.Data_Creazione,
+                          m.User,
+                          m.Messaggio,
+                          m.Id_Post
+                       }).ToListAsync();
+
+                await _context.SaveChangesAsync();
+
+                response.Messaggio = messaggio;
+                response.Success = true;
+                response.Errors = null;
+            }
+            catch(Exception ex)
+            {
+                response.Messaggio = null;
+                response.Success = false;
+                response.Errors = new List<string>() { ex.Message };
+            }
+
+            return response;
+        }
+
+        public async Task<ResponsePostTopic> PutTopic(RequestPutTopic request)
+        {
+            ResponsePostTopic response = new ResponsePostTopic();
+            try
+            {
+                var topic = await _context.Topics.FirstOrDefaultAsync(t => t.Id == request.IdTopic);
+                if(topic == null)
+                {
+                    response.Topic = null;
+                    response.Success = false;
+                    response.Errors = new List<string>() { "Topic non trovato" };
+
+                    return response;
+                }
+                topic.Titolo = request.Titolo;
+
+                await (from t in _context.Topics
+                       select new
+                       {
+                           t.Id,
+                           t.Film,
+                           t.Titolo
+                       }).ToListAsync();
+
+                await _context.SaveChangesAsync();
+
+                response.Topic = topic;
+                response.Success = true;
+                response.Errors = null;
+            }
+            catch (Exception ex)
+            {
+                response.Topic = null;
+                response.Success = false;
+                response.Errors = new List<string>() { ex.Message };
+            }
+
+            return response;
+        }
+
+
+        #endregion
     }
 
 }
