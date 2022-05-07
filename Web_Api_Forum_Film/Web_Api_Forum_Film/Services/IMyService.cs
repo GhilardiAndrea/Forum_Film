@@ -15,10 +15,11 @@ namespace Web_Api_Forum_Film.Services
 
         public Task<ResponseFilms> GetFilmsFromName(string name);
 
-        public Task<ResponsePosts> GetAllPostOfUser(int userId);
+        public Task<ResponsePosts> GetAllPostOfUser(string email);
 
         public Task<ResponseFilms> GetAllFilm();
 
+        public Task<ResponsePostuser> PostUser(RequestPostUser request);
 
         public Task<ResponsePostPost> PostPost(RequestPost request);
 
@@ -32,6 +33,8 @@ namespace Web_Api_Forum_Film.Services
         public Task<ResponsePostMessaggio> PutMessaggio(RequestPutMessaggio request);
 
         public Task<ResponsePostTopic> PutTopic(RequestPutTopic request);
+
+        public Task<ResponsePostuser> PutUser(RequestPutUser request);
 
 
         public Task<ResponsePostPost> DeletePost(int id);

@@ -40,10 +40,10 @@ namespace Web_Api_Forum_Film.Controller
         }
 
 
-        [HttpGet("userposts/{id}")]
-        public async Task<ResponsePosts> GetAllPostOfUser(int id)
+        [HttpGet("userposts/{email}")]
+        public async Task<ResponsePosts> GetAllPostOfUser(string email)
         {
-            return await _myservice.GetAllPostOfUser(id);
+            return await _myservice.GetAllPostOfUser(email);
         }
 
 
@@ -89,6 +89,12 @@ namespace Web_Api_Forum_Film.Controller
             return await _myservice.PostMessaggio(request);
         }
 
+        [HttpPost("user")]
+        public async Task<ResponsePostuser> PostUser([FromBody] RequestPostUser request)
+        {
+            return await _myservice.PostUser(request);
+        }
+
         #endregion
 
 
@@ -106,6 +112,12 @@ namespace Web_Api_Forum_Film.Controller
             return await _myservice.PutTopic(request);
         }
 
+        [HttpPut("putuser")]
+        public async Task<ResponsePostuser> PutUser([FromBody] RequestPutUser request)
+        {
+            return await _myservice.PutUser(request);
+        }
+
         #endregion
 
 
@@ -113,9 +125,15 @@ namespace Web_Api_Forum_Film.Controller
 
         // DELETE api/<MyController>/5
         [HttpDelete("Deletepost/id")]
-        public async Task<ResponsePostPost> Delete(int id)
+        public async Task<ResponsePostPost> DeletePost(int id)
         {
             return await _myservice.DeletePost(id);
+        }
+
+        [HttpDelete("Deletetopic/id")]
+        public async Task<ResponsePostTopic> DeleteTopic(int id)
+        {
+            return await _myservice.DeleteTopic(id);
         }
 
         #endregion

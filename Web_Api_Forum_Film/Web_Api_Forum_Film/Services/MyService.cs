@@ -60,11 +60,11 @@ namespace Web_Api_Forum_Film.Services
             return response;
         }
 
-        public async Task<ResponsePosts> GetAllPostOfUser(int userId)
+        public async Task<ResponsePosts> GetAllPostOfUser(string email)
         {
             ResponsePosts response = new ResponsePosts();
 
-            var lista = await _context.Posts.Where(p => p.User.Id == userId).ToListAsync();
+            var lista = await _context.Posts.Where(p => p.User.Email == email).ToListAsync();
 
             await (from p in _context.Posts
                    select new
@@ -190,6 +190,8 @@ namespace Web_Api_Forum_Film.Services
                 response.Messaggio = null;
                 response.Errors = new List<string>() { ex.Message };
                 response.Success = false;
+
+                return response;
             }
 
 
@@ -236,6 +238,8 @@ namespace Web_Api_Forum_Film.Services
                 response.Post = null;
                 response.Errors = new List<string>() { ex.Message };
                 response.Success = false;
+
+                return response;
             }
 
 
@@ -273,6 +277,8 @@ namespace Web_Api_Forum_Film.Services
                 response.Topic = null;
                 response.Errors = new List<string>() { ex.Message };
                 response.Success = false;
+
+                return response;
             }
 
 
@@ -283,7 +289,38 @@ namespace Web_Api_Forum_Film.Services
             return response;
         }
 
+        public async Task<ResponsePostuser> PostUser(RequestPostUser request)
+        {
+            ResponsePostuser response = new ResponsePostuser();
+            MyUser user = new MyUser()
+            {
+                Cognome = request.User.Cognome,
+                Nome = request.User.Nome,
+                Data_Nascita = request.User.Data_Nascita,
+                Email = request.User.Email,
+                Nazione = request.User.Nazione
+            };
+            try
+            {
+                await _context.Users.AddAsync(user);
+                await _context.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                response.User = null;
+                response.Errors = new List<string>() { ex.Message };
+                response.Success = false;
 
+                return response;
+            }
+
+
+            response.User = user;
+            response.Errors = null;
+            response.Success = true;
+
+            return response;
+        }
 
         #endregion
 
@@ -327,6 +364,8 @@ namespace Web_Api_Forum_Film.Services
                 response.Messaggio = null;
                 response.Success = false;
                 response.Errors = new List<string>() { ex.Message };
+
+                return response;
             }
 
             return response;
@@ -367,13 +406,53 @@ namespace Web_Api_Forum_Film.Services
                 response.Topic = null;
                 response.Success = false;
                 response.Errors = new List<string>() { ex.Message };
+
+                return response;
             }
 
             return response;
         }
 
+        public async Task<ResponsePostuser> PutUser(RequestPutUser request)
+        {
+            ResponsePostuser response = new ResponsePostuser();
+            try
+            {
+                var user = await _context.Users.FirstOrDefaultAsync(t => t.Email == request.User.Email);
+                if (user == null)
+                {
+                    response.User = null;
+                    response.Success = false;
+                    response.Errors = new List<string>() { "User non trovato" };
 
+                    return response;
+                }
+
+                user.Cognome = request.User.Cognome;
+                user.Nome = request.User.Nome;
+                user.Data_Nascita = request.User.Data_Nascita;
+                user.Nazione = request.User.Nazione;
+
+                await _context.SaveChangesAsync();
+
+                response.User = user;
+                response.Success = true;
+                response.Errors = null;
+            }
+            catch (Exception ex)
+            {
+                response.User = null;
+                response.Success = false;
+                response.Errors = new List<string>() { ex.Message };
+
+                return response;
+            }
+
+            return response;
+        }
         #endregion
+
+        #region Deletes
 
         public async Task<ResponsePostPost> DeletePost(int id)
         {
@@ -425,8 +504,30 @@ namespace Web_Api_Forum_Film.Services
 
                 return response;
             }
-            
+
+            await (from t in _context.Topics
+                   select new
+                   {
+                       t.Id,
+                       t.Titolo,
+                       t.Film
+                   }).ToListAsync();
+
+            _context.Topics.Remove(topic);
+            await _context.SaveChangesAsync();
+
+            response.Success = true;
+            response.Topic = topic;
+            response.Errors = null;
+
+            return response;
+
         }
+
+       
+
+        #endregion
+
     }
 
 }
