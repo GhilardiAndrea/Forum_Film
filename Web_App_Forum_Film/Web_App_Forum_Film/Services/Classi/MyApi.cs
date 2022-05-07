@@ -21,7 +21,7 @@ namespace Web_App_Forum_Film.Services.Classi
             HttpClient client = new HttpClient();
             try
             {
-                var result = await client.GetStringAsync(url + "api/api/film");
+                var result = await client.GetStringAsync(url + "api/Api/film");
 
                 ResponseFilms response = JsonConvert.DeserializeObject<ResponseFilms>(result);
 
@@ -38,7 +38,7 @@ namespace Web_App_Forum_Film.Services.Classi
             HttpClient client = new HttpClient();
             try
             {
-                var result = await client.GetStringAsync(url + $"api/api/topicposts/{id}");
+                var result = await client.GetStringAsync(url + $"api/Api/topicposts/{id}");
 
                 ResponsePosts response = JsonConvert.DeserializeObject<ResponsePosts>(result);
 
@@ -55,7 +55,7 @@ namespace Web_App_Forum_Film.Services.Classi
             HttpClient client = new HttpClient();
             try
             {
-                var result = await client.GetStringAsync(url + $"api/api/userposts/{email}");
+                var result = await client.GetStringAsync(url + $"api/Api/userposts/{email}");
 
                 ResponsePosts response = JsonConvert.DeserializeObject<ResponsePosts>(result);
 
@@ -72,7 +72,7 @@ namespace Web_App_Forum_Film.Services.Classi
             HttpClient client = new HttpClient();
             try
             {
-                var result = await client.GetStringAsync(url + $"api/api/topic/{name}");
+                var result = await client.GetStringAsync(url + $"api/Api/topic/{name}");
 
                 ResponseTopics response = JsonConvert.DeserializeObject<ResponseTopics>(result);
 
@@ -88,7 +88,7 @@ namespace Web_App_Forum_Film.Services.Classi
             HttpClient client = new HttpClient();
             try
             {
-                var result = await client.GetStringAsync(url + $"api/api/film/{name}");
+                var result = await client.GetStringAsync(url + $"api/Api/film/{name}");
 
                 ResponseFilms response = JsonConvert.DeserializeObject<ResponseFilms>(result);
 
@@ -102,10 +102,11 @@ namespace Web_App_Forum_Film.Services.Classi
 
         #endregion
 
+        #region POST
 
         public static async Task<ResponsePostPost> PostPost(RequestPost request)
         {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + "api/api/post");
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + "api/Api/post");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
             try
@@ -140,7 +141,7 @@ namespace Web_App_Forum_Film.Services.Classi
         }
         public static async Task<ResponsePostTopic> PostTopic(RequestTopic request)
         {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + "api/api/topic");
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + "api/Api/topic");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
             try
@@ -175,7 +176,7 @@ namespace Web_App_Forum_Film.Services.Classi
         }
         public static async Task<ResponsePostFilm> PostFilm(RequestFilm request)
         {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + "api/api/film");
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + "api/Api/film");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
             try
@@ -211,7 +212,7 @@ namespace Web_App_Forum_Film.Services.Classi
 
         public static async Task<ResponsePostMessaggio> PostMessaggio(RequestMessaggio request)
         {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + "api/api/messaggio");
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + "api/Api/messaggio");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
             try
@@ -244,9 +245,49 @@ namespace Web_App_Forum_Film.Services.Classi
                 };
             }
         }
-        public static async Task<CreateTopicResponse> ModTopic(ModTopicRequest request)
+
+        public static async Task<ResponsePostuser> PostUser(RequestPostUser request)
         {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + "api/Manga/ModTopic");
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + "api/Api/user");
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+            try
+            {
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    string json = JsonConvert.SerializeObject(request);
+
+                    streamWriter.Write(json);
+                }
+
+                var httpResponse = (HttpWebResponse)await httpWebRequest.GetResponseAsync();
+                ResponsePostuser response;
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+                    response = JsonConvert.DeserializeObject<ResponsePostuser>(result);
+                }
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return new ResponsePostuser()
+                {
+                    Success = false,
+                    Errors = new List<string>
+                    {
+                        ex.Message
+                    }
+                };
+            }
+        }
+
+        #endregion
+
+        #region PUTS
+        public static async Task<ResponsePostMessaggio> PutMessaggio(RequestPutMessaggio request)
+        {
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + "api/Api/putmessaggio");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "PUT";
             try
@@ -259,20 +300,20 @@ namespace Web_App_Forum_Film.Services.Classi
                 }
 
                 var httpResponse = (HttpWebResponse)await httpWebRequest.GetResponseAsync();
-                CreateTopicResponse response;
+                ResponsePostMessaggio response;
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
                     var result = streamReader.ReadToEnd();
-                    response = JsonConvert.DeserializeObject<CreateTopicResponse>(result);
+                    response = JsonConvert.DeserializeObject<ResponsePostMessaggio>(result);
                 }
                 return response;
             }
             catch (Exception ex)
             {
-                return new CreateTopicResponse()
+                return new ResponsePostMessaggio()
                 {
-                    state = false,
-                    Error = new List<string>
+                    Success = false,
+                    Errors = new List<string>
                     {
                         ex.Message
                     }
@@ -280,11 +321,11 @@ namespace Web_App_Forum_Film.Services.Classi
             }
         }
 
-        public static async Task<DeletePostResponse> DeletePost(DeletePostRequest request)
+        public static async Task<ResponsePostTopic> PutTopic(RequestPutTopic request)
         {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + $"api/Manga/DeletePost");
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + "api/Api/puttopic");
             httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "DELETE";
+            httpWebRequest.Method = "PUT";
             try
             {
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
@@ -295,31 +336,32 @@ namespace Web_App_Forum_Film.Services.Classi
                 }
 
                 var httpResponse = (HttpWebResponse)await httpWebRequest.GetResponseAsync();
-                DeletePostResponse response;
+                ResponsePostTopic response;
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
                     var result = streamReader.ReadToEnd();
-                    response = JsonConvert.DeserializeObject<DeletePostResponse>(result);
+                    response = JsonConvert.DeserializeObject<ResponsePostTopic>(result);
                 }
                 return response;
             }
             catch (Exception ex)
             {
-                return new DeletePostResponse()
+                return new ResponsePostTopic()
                 {
-                    state = false,
-                    Error = new List<string>
+                    Success = false,
+                    Errors = new List<string>
                     {
                         ex.Message
                     }
                 };
             }
         }
-        public static async Task<DeleteTopicResponse> DeleteTopic(DeleteTopicRequest request)
+
+        public static async Task<ResponsePostuser> PutUser(RequestPutUser request)
         {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + $"api/Manga/DeleteTopic");
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + "api/Api/putuser");
             httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "DELETE";
+            httpWebRequest.Method = "PUT";
             try
             {
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
@@ -330,60 +372,102 @@ namespace Web_App_Forum_Film.Services.Classi
                 }
 
                 var httpResponse = (HttpWebResponse)await httpWebRequest.GetResponseAsync();
-                DeleteTopicResponse response;
+                ResponsePostuser response;
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
                     var result = streamReader.ReadToEnd();
-                    response = JsonConvert.DeserializeObject<DeleteTopicResponse>(result);
+                    response = JsonConvert.DeserializeObject<ResponsePostuser>(result);
                 }
                 return response;
             }
             catch (Exception ex)
             {
-                return new DeleteTopicResponse()
+                return new ResponsePostuser()
                 {
-                    state = false,
-                    Error = new List<string>
+                    Success = false,
+                    Errors = new List<string>
                     {
                         ex.Message
                     }
                 };
             }
         }
-        public static async Task<DeleteReplyResponse> DeleteReply(DeleteReplyRequest request)
+
+        #endregion
+
+        #region DELETES
+        public static async Task<ResponsePostPost> DeletePost(int id)
         {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + $"api/Manga/DeleteReply");
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + $"api/Api/Deletepost/{id}");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "DELETE";
             try
             {
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
-                    string json = JsonConvert.SerializeObject(request);
+                    string json = JsonConvert.SerializeObject(id);
 
                     streamWriter.Write(json);
                 }
 
                 var httpResponse = (HttpWebResponse)await httpWebRequest.GetResponseAsync();
-                DeleteReplyResponse response;
+                ResponsePostPost response;
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
                     var result = streamReader.ReadToEnd();
-                    response = JsonConvert.DeserializeObject<DeleteReplyResponse>(result);
+                    response = JsonConvert.DeserializeObject<ResponsePostPost>(result);
                 }
                 return response;
             }
             catch (Exception ex)
             {
-                return new DeleteReplyResponse()
+                return new ResponsePostPost()
                 {
-                    state = false,
-                    Error = new List<string>
+                    Success = false,
+                    Errors = new List<string>
                     {
                         ex.Message
                     }
                 };
             }
         }
+        public static async Task<ResponsePostTopic> DeleteTopic(int id)
+        {
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + $"api/Api/Deletetopic/{id}");
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "DELETE";
+            try
+            {
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    string json = JsonConvert.SerializeObject(id);
+
+                    streamWriter.Write(json);
+                }
+
+                var httpResponse = (HttpWebResponse)await httpWebRequest.GetResponseAsync();
+                ResponsePostTopic response;
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+                    response = JsonConvert.DeserializeObject<ResponsePostTopic>(result);
+                }
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return new ResponsePostTopic()
+                {
+                    Success = false,
+                    Errors = new List<string>
+                    {
+                        ex.Message
+                    }
+                };
+            }
+        }
+
+        #endregion
     }
+
 }

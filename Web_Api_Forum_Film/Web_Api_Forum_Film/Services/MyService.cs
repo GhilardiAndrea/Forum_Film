@@ -162,7 +162,7 @@ namespace Web_Api_Forum_Film.Services
             {
                 var post = await _context.Posts.FirstOrDefaultAsync(p=>p.Id == request.IdPost);
                 
-                messaggio.User = await _context.Users.FirstOrDefaultAsync(u => u.Id == request.IdUser);
+                messaggio.User = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.EmailUser);
                 messaggio.Messaggio = request.Messaggio;
                 messaggio.Data_Creazione = DateTime.Now;
                 await (from p in _context.Posts
@@ -210,7 +210,7 @@ namespace Web_Api_Forum_Film.Services
             try
             {
                 post.Topic = await _context.Topics.FirstOrDefaultAsync(t => t.Id == request.IdTopic);
-                post.User = await _context.Users.FirstOrDefaultAsync(u => u.Id == request.IdUser);
+                post.User = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.EmailUser);
                 post.Topic.Film = await _context.Films.FirstOrDefaultAsync(f=>f.Id == post.Topic.Id);
                 if(post.Topic == null || post.User == null)
                 {

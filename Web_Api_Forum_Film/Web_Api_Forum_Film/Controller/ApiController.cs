@@ -100,13 +100,13 @@ namespace Web_Api_Forum_Film.Controller
 
         #region Puts
         // PUT api/<MyController>/5
-        [HttpPut("messaggio")]
+        [HttpPut("putmessaggio")]
         public async Task<ResponsePostMessaggio> PutMessaggio([FromBody] RequestPutMessaggio request)
         {
             return await _myservice.PutMessaggio(request);
         }
 
-        [HttpPut("topic")]
+        [HttpPut("puttopic")]
         public async Task<ResponsePostTopic> PutTopic([FromBody] RequestPutTopic request)
         {
             return await _myservice.PutTopic(request);
@@ -124,13 +124,13 @@ namespace Web_Api_Forum_Film.Controller
         #region Deletes
 
         // DELETE api/<MyController>/5
-        [HttpDelete("Deletepost/id")]
+        [HttpDelete("Deletepost/{id}")]
         public async Task<ResponsePostPost> DeletePost(int id)
         {
             return await _myservice.DeletePost(id);
         }
 
-        [HttpDelete("Deletetopic/id")]
+        [HttpDelete("Deletetopic/{id}")]
         public async Task<ResponsePostTopic> DeleteTopic(int id)
         {
             return await _myservice.DeleteTopic(id);
