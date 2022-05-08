@@ -94,12 +94,17 @@ namespace Web_Api_Forum_Film.Services
         {
             ResponseFilms response = new ResponseFilms();
             name = name.Trim().ToLower();
-            var lista = await _context.Films.Where(f => f.Titolo.ToLower().StartsWith(name)).ToListAsync();
+            var lista = await _context.Films.Where(f => f.Titolo_Originale.ToLower().StartsWith(name)).ToListAsync();
             await(from f in _context.Films
                   select new
                   {
                       f.Id,
-                      f.Titolo
+                      f.Titolo_Originale,
+                      f.Budget,
+                      f.Genere,
+                      f.Lingua_Originale,
+                      f.OverView,
+                      f.Poster_Path
                   }).ToListAsync();
 
             if (lista == null)

@@ -13,7 +13,7 @@ namespace Web_App_Forum_Film.Services.Classi
 {
     public class MyApi
     {
-        public static string url = "https://localhost:5001/";
+        public static string url = "https://localhost:44360/";
 
         #region GET
         public static async Task<ResponseFilms> GetAllFilm()
@@ -27,9 +27,16 @@ namespace Web_App_Forum_Film.Services.Classi
 
                 return response;
             }
-            catch
+            catch (Exception ex)
             {
-                return null;
+                return new ResponseFilms()
+                {
+                    Success = false,
+                    Errors = new List<string>
+                    {
+                        ex.Message
+                    }
+                };
             }
 
         }
@@ -44,9 +51,16 @@ namespace Web_App_Forum_Film.Services.Classi
 
                 return response;
             }
-            catch
+            catch (Exception ex)
             {
-                return null;
+                return new ResponsePosts()
+                {
+                    Success = false,
+                    Errors = new List<string>
+                    {
+                        ex.Message
+                    }
+                };
             }
 
         }
@@ -61,9 +75,16 @@ namespace Web_App_Forum_Film.Services.Classi
 
                 return response;
             }
-            catch
+            catch (Exception ex)
             {
-                return null;
+                return new ResponsePosts()
+                {
+                    Success = false,
+                    Errors = new List<string>
+                    {
+                        ex.Message
+                    }
+                };
             }
 
         }
@@ -78,9 +99,16 @@ namespace Web_App_Forum_Film.Services.Classi
 
                 return response;
             }
-            catch
+            catch (Exception ex)
             {
-                return null;
+                return new ResponseTopics()
+                {
+                    Success = false,
+                    Errors = new List<string>
+                    {
+                        ex.Message
+                    }
+                };
             }
         }
         public static async Task<ResponseFilms> GetFilmsFromName(string name)
@@ -94,9 +122,16 @@ namespace Web_App_Forum_Film.Services.Classi
 
                 return response;
             }
-            catch
+            catch (Exception ex)
             {
-                return null;
+                return new ResponseFilms()
+                {
+                    Success = false,
+                    Errors = new List<string>
+                    {
+                        ex.Message
+                    }
+                };
             }
         }
 

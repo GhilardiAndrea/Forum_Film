@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <StartupObject>Web_Api_Forum_Film.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

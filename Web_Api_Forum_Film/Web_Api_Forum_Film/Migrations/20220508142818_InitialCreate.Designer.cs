@@ -9,8 +9,8 @@ using Web_Api_Forum_Film.Data;
 namespace Web_Api_Forum_Film.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20220502121623_prima")]
-    partial class prima
+    [Migration("20220508142818_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,22 @@ namespace Web_Api_Forum_Film.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Titolo")
+                    b.Property<int>("Budget")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Genere")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Lingua_Originale")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OverView")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Poster_Path")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Titolo_Originale")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

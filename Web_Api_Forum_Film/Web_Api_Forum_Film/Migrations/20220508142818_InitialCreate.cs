@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Web_Api_Forum_Film.Migrations
 {
-    public partial class prima : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,12 @@ namespace Web_Api_Forum_Film.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Titolo = table.Column<string>(type: "TEXT", nullable: false)
+                    Titolo_Originale = table.Column<string>(type: "TEXT", nullable: false),
+                    Budget = table.Column<int>(type: "INTEGER", nullable: false),
+                    Genere = table.Column<string>(type: "TEXT", nullable: true),
+                    Lingua_Originale = table.Column<string>(type: "TEXT", nullable: true),
+                    OverView = table.Column<string>(type: "TEXT", nullable: true),
+                    Poster_Path = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

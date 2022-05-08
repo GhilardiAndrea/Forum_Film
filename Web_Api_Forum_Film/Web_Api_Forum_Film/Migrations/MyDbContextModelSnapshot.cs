@@ -22,7 +22,22 @@ namespace Web_Api_Forum_Film.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Titolo")
+                    b.Property<int>("Budget")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Genere")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Lingua_Originale")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OverView")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Poster_Path")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Titolo_Originale")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

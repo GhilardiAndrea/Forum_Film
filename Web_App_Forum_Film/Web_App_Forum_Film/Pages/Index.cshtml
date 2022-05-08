@@ -4,7 +4,47 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <b class="navbar-brand">Cerca un topic</b>
+        <form method="post" class="d-flex">
+            <input type="text" asp-for="@Model.Cerca" class="form-control me-2" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <b style="color:white">Non lo trovi? Crealo tu!</b>
+            <button type="button" class="btn btn-success">+</button>
+        </div>
+
+
+
+    </div>
+
+</nav>
+
+<br />
+
+<div class="row">
+    @if (Model.Success)
+    {
+        @foreach (var topic in Model.ListaCercata)
+        {
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@topic.Titolo</h5>
+                        <p class="card-text">@topic.Film.Titolo</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
 </div>
+
+
