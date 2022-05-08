@@ -2,6 +2,7 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    string src = "https://image.tmdb.org/t/p/w500";
 }
 
 <nav class="navbar navbar-dark bg-dark">
@@ -34,7 +35,7 @@
         {
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="@src@topic.Film.Poster_Path" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">@topic.Titolo</h5>
                         <p class="card-text">@topic.Film.Titolo_Originale</p>

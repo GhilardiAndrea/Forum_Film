@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "w3BkDZCINIdfOXk1ZH/V22D9xdmP8m+8FDf+6dLx+tURq7ig2n+lJFjQQxRCQFXZNHUifkh+GFH/ZUXRjlre0g==",
+  "dgSpecHash": "Wi8E3CNyLqPz5tuw7qK7Wf/NBPK8dkFD3GvFNVY/gtGm2zzG9l7Vi3j3ulP5IgBQAAlmsJuWwZztqxKJBBnI3Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\andrea\\source\\repos\\Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film.csproj",
+  "projectFilePath": "C:\\Users\\andrea\\Source\\Repos\\Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\andrea\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\andrea\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

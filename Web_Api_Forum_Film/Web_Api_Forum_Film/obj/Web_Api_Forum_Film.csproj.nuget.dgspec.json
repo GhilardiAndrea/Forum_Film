@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\andrea\\source\\repos\\Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film.csproj": {}
+    "C:\\Users\\andrea\\Source\\Repos\\Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film.csproj": {}
   },
   "projects": {
-    "C:\\Users\\andrea\\source\\repos\\Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film.csproj": {
+    "C:\\Users\\andrea\\Source\\Repos\\Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\andrea\\source\\repos\\Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film.csproj",
+        "projectUniqueName": "C:\\Users\\andrea\\Source\\Repos\\Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film.csproj",
         "projectName": "Web_Api_Forum_Film",
-        "projectPath": "C:\\Users\\andrea\\source\\repos\\Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film.csproj",
+        "projectPath": "C:\\Users\\andrea\\Source\\Repos\\Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film.csproj",
         "packagesPath": "C:\\Users\\andrea\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\andrea\\source\\repos\\Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film\\obj\\",
+        "outputPath": "C:\\Users\\andrea\\Source\\Repos\\Forum_Film\\Web_Api_Forum_Film\\Web_Api_Forum_Film\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
