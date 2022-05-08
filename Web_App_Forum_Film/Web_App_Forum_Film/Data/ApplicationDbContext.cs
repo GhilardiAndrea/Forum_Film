@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Web_App_Forum_Film.Areas.Identity;
+using Web_Api_Forum_Film.Services.Class;
 
 namespace Web_App_Forum_Film.Data
 {
@@ -13,5 +14,6 @@ namespace Web_App_Forum_Film.Data
             : base(options)
         {
         }
+        public DbSet<Web_Api_Forum_Film.Services.Class.Topic> Topic { get; set; }
     }
 }

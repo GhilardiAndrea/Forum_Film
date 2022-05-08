@@ -14,7 +14,7 @@ namespace Web_App_Forum_Film.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.15");
+                .HasAnnotation("ProductVersion", "5.0.16");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -148,6 +148,41 @@ namespace Web_App_Forum_Film.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Web_Api_Forum_Film.Services.Class.Film", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Titolo")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Film");
+                });
+
+            modelBuilder.Entity("Web_Api_Forum_Film.Services.Class.Topic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("FilmId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Titolo")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FilmId");
+
+                    b.ToTable("Topic");
+                });
+
             modelBuilder.Entity("Web_App_Forum_Film.Areas.Identity.MyUser", b =>
                 {
                     b.Property<string>("Id")
@@ -157,6 +192,7 @@ namespace Web_App_Forum_Film.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Cognome")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -180,9 +216,11 @@ namespace Web_App_Forum_Film.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Nazione")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedEmail")
@@ -273,6 +311,15 @@ namespace Web_App_Forum_Film.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Web_Api_Forum_Film.Services.Class.Topic", b =>
+                {
+                    b.HasOne("Web_Api_Forum_Film.Services.Class.Film", "Film")
+                        .WithMany()
+                        .HasForeignKey("FilmId");
+
+                    b.Navigation("Film");
                 });
 #pragma warning restore 612, 618
         }

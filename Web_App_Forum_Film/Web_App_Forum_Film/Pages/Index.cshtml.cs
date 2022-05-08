@@ -27,8 +27,19 @@ namespace Web_App_Forum_Film.Pages
             _logger = logger;
         }
 
+        public void Redirecta()
+        {
+            RedirectToPage("/Pages/Crud/Index");
+        }
+
         public async Task<IActionResult> OnGet()
         {
+            var response = await MyApi.GetRandomTopics();
+            if(response.Success)
+            {
+                ListaCercata = response.List;
+                Success = true;
+            }
             return Page();
         }
 

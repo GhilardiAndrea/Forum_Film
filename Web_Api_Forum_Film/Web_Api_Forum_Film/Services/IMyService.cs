@@ -13,6 +13,8 @@ namespace Web_Api_Forum_Film.Services
 
         public Task<ResponseTopics> GetTopicsFromName(string name);
 
+        public Task<ResponseTopics> GetRandomTopics();
+
         public Task<ResponseFilms> GetFilmsFromName(string name);
 
         public Task<ResponsePosts> GetAllPostOfUser(string email);

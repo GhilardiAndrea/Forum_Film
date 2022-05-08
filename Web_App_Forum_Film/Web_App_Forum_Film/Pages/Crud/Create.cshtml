@@ -1,0 +1,58 @@
+﻿@page
+@model Web_App_Forum_Film.Pages.Crud.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Topic</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <input type="text" name="cerca" id="textbox" />
+            <button type="submit" asp-for="Cerca" asp-page-handler="Cerca" id="btn">click</button>
+        </form>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Model.ListaFilm != null)
+            {
+                <div class="form-group">
+                    <label asp-for="Topic.Film" class="control-label"></label>
+                    <select asp-for="Topic.Film.Titolo_Originale" class="form-control">
+                        @foreach (var item in Model.ListaFilm)
+                        {
+                        <option>@item.Id - @item.Titolo_Originale </option>
+                        }
+                    </select>
+                    <span asp-validation-for="Topic.Titolo" class="text-danger"></span>
+                </div>
+            }
+
+            <div class="form-group">
+                <label asp-for="Topic.Titolo" class="control-label"></label>
+                <input asp-for="Topic.Titolo" class="form-control" />
+                <span asp-validation-for="Topic.Titolo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" asp-page-handler="Crea" value="Crea" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    
+}
+
+

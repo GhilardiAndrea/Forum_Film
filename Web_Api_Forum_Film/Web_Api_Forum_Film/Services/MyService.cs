@@ -150,6 +150,36 @@ namespace Web_Api_Forum_Film.Services
             return response;
         }
 
+        public async Task<ResponseTopics> GetRandomTopics()
+        {
+            Random random = new Random();
+            List<Topic> lista = await _context.Topics.ToListAsync();
+            List<Topic> listafinale = new List<Topic>();
+            int num;
+            lista = lista.OrderBy(t => t.Id).ToList();
+            for (int i = 0; i < 12; i++)
+            {
+                num = random.Next(lista[0].Id, lista[lista.Count - 1].Id);
+                listafinale.Add(lista[num]);
+            }
+
+            await (from t in _context.Topics
+                   select new
+                   {
+                       t.Id,
+                       t.Titolo,
+                       t.Film
+                   }).ToListAsync();
+
+            ResponseTopics response = new ResponseTopics();
+
+            response.List = listafinale;
+            response.Errors = null;
+            response.Success = true;
+
+            return response;
+        }
+
         #endregion
 
         #region Posts
@@ -530,6 +560,8 @@ namespace Web_Api_Forum_Film.Services
         }
 
        
+
+
 
         #endregion
 

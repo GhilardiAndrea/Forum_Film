@@ -370,3 +370,8 @@ C:\Users\andrea\Source\Repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\bi
 C:\Users\andrea\Source\Repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Web_App_Forum_Film.Views.pdb
 C:\Users\andrea\Source\Repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Web_App_Forum_Film.csproj.CopyComplete
 C:\Users\andrea\Source\Repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Web_App_Forum_Film.genruntimeconfig.cache
+C:\Users\andrea\Source\Repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Razor\Pages\Crud\Create.cshtml.g.cs
+C:\Users\andrea\Source\Repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Razor\Pages\Crud\Delete.cshtml.g.cs
+C:\Users\andrea\Source\Repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Razor\Pages\Crud\Details.cshtml.g.cs
+C:\Users\andrea\Source\Repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Razor\Pages\Crud\Edit.cshtml.g.cs
+C:\Users\andrea\Source\Repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Razor\Pages\Crud\Index.cshtml.g.cs
