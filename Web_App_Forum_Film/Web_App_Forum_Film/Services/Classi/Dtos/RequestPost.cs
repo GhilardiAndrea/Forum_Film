@@ -9,7 +9,7 @@ namespace Web_Api_Forum_Film.Services.Class.Dtos
     public class RequestPost
     {
         [Required]
-        public int IdUser { get; set; }
+        public string EmailUser { get; set; }
 
         [Required]
         public int IdTopic { get; set; }

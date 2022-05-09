@@ -3,23 +3,54 @@
 
 @{
     ViewData["Title"] = "Details";
+    string src = "https://image.tmdb.org/t/p/w500";
+    int x = 0;
 }
 
-<h1>Details</h1>
+<h1 class="text-center">@Model.Topic.Titolo</h1>
+<div class="container-fluid align-content-center">
+    <div class="col-md-12">
+        <div class="card" style="width: 50rem;">
+            <img src="@src@Model.Topic.Film.Poster_Path" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h4 class="card-title">TOPIC: @Model.Topic.Titolo</h4>
+                <b class="card-text">TITOLO FILM:@Model.Topic.Film.Titolo_Originale</b><br />
+                <b class="card-text">LINGUA ORIGINALE:@Model.Topic.Film.Lingua_Originale</b><br />
+                <b class="card-text">GENERE: @Model.Topic.Film.Genere</b><br />
+                <b class="card-text">DESCRIZIONE: @Model.Topic.Film.OverView</b><br />
+            </div>
 
-<div>
-    <h4>Topic</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Topic.Titolo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Topic.Titolo)
-        </dd>
-    </dl>
+
+            <h4 class="text-center"><a asp-route-id="@Model.Topic.Id" asp-page="/Crud/CreaPost">AGGIUNGI UN POST!</a></h4>
+            <div class="row">
+                @foreach (var post in Model.Posts)
+                {
+                    <div class="card" style="width: 20rem;">
+                        @post.Messaggi[0].User.Nome @post.Messaggi[0].User.Cognome<br />
+                        @post.Messaggi[0].Messaggio
+                        <div class="card-body">
+                            @foreach (var messaggio in post.Messaggi)
+                            {
+                                if (x == 0)
+                                    break;
+                                @messaggio.User.Nome @messaggio.User.Cognome @messaggio.Data_Creazione <br>
+                                @messaggio.Messaggio
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+            
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Topic.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
-</div>
+
+<style>
+    .card {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+    }
+</style>
+
+

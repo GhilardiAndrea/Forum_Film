@@ -30,6 +30,33 @@ namespace Web_Api_Forum_Film.Services
             return response;
         }
 
+        public async Task<ResponseTopics> GetTopic(int id)
+        {
+            ResponseTopics response = new ResponseTopics();
+            var lista = await _context.Topics.Where(t => t.Id == id).ToListAsync();
+            await(from t in _context.Topics
+                  select new
+                  {
+                      t.Id,
+                      t.Titolo,
+                      t.Film
+                  }).ToListAsync();
+
+            if (lista == null)
+            {
+                response.List = null;
+                response.Errors = new List<string>() { "Non sono stati trovati topic coll' id selezionato" };
+                response.Success = false;
+            }
+            else
+            {
+                response.List = lista;
+                response.Errors = null;
+                response.Success = true;
+            }
+            return response;
+        }
+
         public async Task<ResponsePosts> GetAllPostInTopic(int topicId)
         {
             ResponsePosts response = new ResponsePosts();
@@ -559,7 +586,9 @@ namespace Web_Api_Forum_Film.Services
 
         }
 
-       
+        
+
+
 
 
 

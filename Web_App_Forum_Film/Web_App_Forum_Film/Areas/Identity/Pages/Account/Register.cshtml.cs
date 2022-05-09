@@ -13,7 +13,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Web_Api_Forum_Film.Services.Class.Dtos;
 using Web_App_Forum_Film.Areas.Identity;
+using Web_App_Forum_Film.Services.Classi;
 
 namespace Web_App_Forum_Film.Areas.Identity.Pages.Account
 {
@@ -95,6 +97,19 @@ namespace Web_App_Forum_Film.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    var risultato = await MyApi.PostUser(new RequestPostUser()
+                    {
+                        User = new Web_Api_Forum_Film.Services.MyUser()
+                        {
+                            Nome = Input.Nome,
+                            Cognome = Input.Cognome,
+                            Email = Input.Email,
+                            Nazione = Input.Nazione,
+                            Data_Nascita = Input.Data_Nascita
+                        }
+                    });
+                    if (!risultato.Success)
+                        return RedirectToPage("/Error");
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

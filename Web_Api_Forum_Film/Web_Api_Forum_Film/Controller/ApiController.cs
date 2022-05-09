@@ -53,6 +53,12 @@ namespace Web_Api_Forum_Film.Controller
             return await _myservice.GetTopicsFromName(name);
         }
 
+        [HttpGet("topicid/{id}")]
+        public async Task<ResponseTopics> GetTopic(int id)
+        {
+            return await _myservice.GetTopic(id);
+        }
+
         [HttpGet("topic/random")]
         public async Task<ResponseTopics> GetTopicsRandom()
         {

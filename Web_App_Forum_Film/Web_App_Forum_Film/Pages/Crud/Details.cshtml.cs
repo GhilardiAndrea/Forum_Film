@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Web_Api_Forum_Film.Services.Class;
 using Web_App_Forum_Film.Data;
+using Web_App_Forum_Film.Services.Classi;
 
 namespace Web_App_Forum_Film.Pages.Crud
 {
@@ -21,6 +22,8 @@ namespace Web_App_Forum_Film.Pages.Crud
 
         public Topic Topic { get; set; }
 
+        public List<ForumPost> Posts { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -28,11 +31,20 @@ namespace Web_App_Forum_Film.Pages.Crud
                 return NotFound();
             }
 
-            Topic = await _context.Topic.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (Topic == null)
+            var response = await MyApi.GetTopic(int.Parse(id.ToString()));
+            if (response.Success)
+            {
+                Topic = response.List[0];
+            }
+            else
             {
                 return NotFound();
+            }
+            
+            var response2 = await MyApi.GetAllPostsInTopic(int.Parse(id.ToString()));
+            if (response.Success)
+            {
+                Posts = response2.List.ToList();
             }
             return Page();
         }

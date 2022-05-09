@@ -1,0 +1,13 @@
+﻿@page
+@model Web_App_Forum_Film.Pages.Crud.CreaPostModel
+@{
+
+}
+<h1>Crea un Post!</h1>
+
+<form method="post">
+    <h3>Titolo</h3>
+    <input type="hidden" asp-for="Topic.Id" />
+    <input type="text" asp-for="Messaggio" />
+    <input type="submit" value="Crea"> 
+</form>

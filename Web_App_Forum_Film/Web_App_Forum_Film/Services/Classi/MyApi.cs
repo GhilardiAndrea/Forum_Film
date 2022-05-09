@@ -41,6 +41,31 @@ namespace Web_App_Forum_Film.Services.Classi
 
         }
 
+        public static async Task<ResponseTopics> GetTopic(int id)
+        {
+            HttpClient client = new HttpClient();
+            try
+            {
+                var result = await client.GetStringAsync(url + $"api/Api/topicid/{id}");
+
+                ResponseTopics response = JsonConvert.DeserializeObject<ResponseTopics>(result);
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return new ResponseTopics()
+                {
+                    Success = false,
+                    Errors = new List<string>
+                    {
+                        ex.Message
+                    }
+                };
+            }
+
+        }
+
         public static async Task<ResponseTopics> GetRandomTopics()
         {
             HttpClient client = new HttpClient();
