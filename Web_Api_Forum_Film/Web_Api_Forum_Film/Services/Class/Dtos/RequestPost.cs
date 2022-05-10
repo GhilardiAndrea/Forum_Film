@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace Web_Api_Forum_Film.Services.Class.Dtos
 {
+    public class RequestGetFilms
+    {
+        [Required]
+        public List<Film> ListaFilm { get; set; }
+    }
     public class RequestPost
     {
         [Required]

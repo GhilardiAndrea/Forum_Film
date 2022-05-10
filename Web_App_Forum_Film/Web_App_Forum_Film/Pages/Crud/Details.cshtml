@@ -7,6 +7,8 @@
     int x = 0;
 }
 
+
+
 <h1 class="text-center">@Model.Topic.Titolo</h1>
 <div class="container-fluid align-content-center">
     <div class="col-md-12">
@@ -25,32 +27,51 @@
             <div class="row">
                 @foreach (var post in Model.Posts)
                 {
+                    x = 0;
                     <div class="card" style="width: 20rem;">
-                        @post.Messaggi[0].User.Nome @post.Messaggi[0].User.Cognome<br />
-                        @post.Messaggi[0].Messaggio
+                        <p style="color:gray">
+                            @post.Messaggi[0].Data_Creazione.ToShortDateString()
+                            @post.Messaggi[0].User.Nome @post.Messaggi[0].User.Cognome
+                        </p>
+                        <b>@post.Messaggi[0].Messaggio</b>
                         <div class="card-body">
+
                             @foreach (var messaggio in post.Messaggi)
                             {
-                                if (x == 0)
-                                    break;
-                                @messaggio.User.Nome @messaggio.User.Cognome @messaggio.Data_Creazione <br>
-                                @messaggio.Messaggio
+                                if (x != 0)
+                                {
+                                    <p>
+                                        <span style="color:gray">
+                                            @messaggio.Data_Creazione.ToShortDateString()
+                                            @messaggio.User.Nome @messaggio.User.Cognome
+                                            <br />
+                                        </span>
+                                        <b>@messaggio.Messaggio</b>
+                                    </p>
+                                }
+                                x++;
                             }
+
+                            <form method="post">
+                                <p>Aggiungi un messaggio!</p>
+                                <input type="text" name="messaggio" />
+                                <input type="hidden" name="id" value="@post.Id" />
+                                <input type="hidden" asp-for="Topic.Id" value="@Model.Topic.Id" />
+                                <input type="submit" value="Aggiungi" />
+                            </form>
+
                         </div>
                     </div>
                 }
             </div>
-            
         </div>
     </div>
 </div>
 
 <style>
     .card {
-    margin: 0 auto;
-    float: none;
-    margin-bottom: 10px;
+        margin: 0 auto;
+        float: none;
+        margin-bottom: 10px;
     }
 </style>
-
-

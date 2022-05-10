@@ -18,11 +18,42 @@ namespace Web_Api_Forum_Film.Services
         }
 
         #region Gets
+        public async Task<ResponseTopics> GetTopicsFromFilms(RequestGetFilms request)
+        {
+            ResponseTopics response = new ResponseTopics();
+            if (request.ListaFilm == null)
+            {
+                response.List = null;
+                response.Errors = new List<string>() { "Non sono stati inviati film" };
+                response.Success = false;
 
+                return response;
+            }
+            List<Topic> lista = new List<Topic>();
+            foreach(var film in request.ListaFilm)
+            {
+                var listaintermedia = _context.Topics.Where(t => t.Film.Id == film.Id).ToList();
+                lista.AddRange(listaintermedia);
+            }
+
+            await (from t in _context.Topics
+                   select new
+                   {
+                       t.Id,
+                       t.Titolo,
+                       t.Film
+                   }).ToListAsync();
+
+            response.List = lista;
+            response.Errors = null;
+            response.Success = true;
+
+            return response;
+        }
         public async Task<ResponseFilms> GetAllFilm()
         {
             ResponseFilms response = new ResponseFilms();
-            
+
             response.List = await _context.Films.ToListAsync();
             response.Success = true;
             response.Errors = null;
@@ -34,13 +65,13 @@ namespace Web_Api_Forum_Film.Services
         {
             ResponseTopics response = new ResponseTopics();
             var lista = await _context.Topics.Where(t => t.Id == id).ToListAsync();
-            await(from t in _context.Topics
-                  select new
-                  {
-                      t.Id,
-                      t.Titolo,
-                      t.Film
-                  }).ToListAsync();
+            await (from t in _context.Topics
+                   select new
+                   {
+                       t.Id,
+                       t.Titolo,
+                       t.Film
+                   }).ToListAsync();
 
             if (lista == null)
             {
@@ -64,13 +95,21 @@ namespace Web_Api_Forum_Film.Services
             var lista = await _context.Posts.Where(p => p.Topic.Id == topicId).ToListAsync();
 
             await (from p in _context.Posts
-             select new
-             {
-                 p.Id,
-                 p.Topic,
-                 p.User,
-                 p.Messaggi
-             }).ToListAsync();
+                   select new
+                   {
+                       p.Id,
+                       p.Topic,
+                       p.User,
+                       p.Messaggi
+                   }).ToListAsync();
+            await (from m in _context.Messaggi
+                   select new
+                   {
+                       m.Id,
+                       m.User,
+                       m.Data_Creazione,
+                       m.Messaggio
+                   }).ToListAsync();
 
             if (lista == null)
             {
@@ -122,17 +161,17 @@ namespace Web_Api_Forum_Film.Services
             ResponseFilms response = new ResponseFilms();
             name = name.Trim().ToLower();
             var lista = await _context.Films.Where(f => f.Titolo_Originale.ToLower().StartsWith(name)).ToListAsync();
-            await(from f in _context.Films
-                  select new
-                  {
-                      f.Id,
-                      f.Titolo_Originale,
-                      f.Budget,
-                      f.Genere,
-                      f.Lingua_Originale,
-                      f.OverView,
-                      f.Poster_Path
-                  }).ToListAsync();
+            await (from f in _context.Films
+                   select new
+                   {
+                       f.Id,
+                       f.Titolo_Originale,
+                       f.Budget,
+                       f.Genere,
+                       f.Lingua_Originale,
+                       f.OverView,
+                       f.Poster_Path
+                   }).ToListAsync();
 
             if (lista == null)
             {
@@ -222,8 +261,8 @@ namespace Web_Api_Forum_Film.Services
             Messaggio_Class messaggio = new Messaggio_Class();
             try
             {
-                var post = await _context.Posts.FirstOrDefaultAsync(p=>p.Id == request.IdPost);
-                
+                var post = await _context.Posts.FirstOrDefaultAsync(p => p.Id == request.IdPost);
+
                 messaggio.User = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.EmailUser);
                 messaggio.Messaggio = request.Messaggio;
                 messaggio.Data_Creazione = DateTime.Now;
@@ -273,8 +312,8 @@ namespace Web_Api_Forum_Film.Services
             {
                 post.Topic = await _context.Topics.FirstOrDefaultAsync(t => t.Id == request.IdTopic);
                 post.User = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.EmailUser);
-                post.Topic.Film = await _context.Films.FirstOrDefaultAsync(f=>f.Id == post.Topic.Id);
-                if(post.Topic == null || post.User == null)
+                post.Topic.Film = await _context.Films.FirstOrDefaultAsync(f => f.Id == post.Topic.Id);
+                if (post.Topic == null || post.User == null)
                 {
                     response.Post = null;
                     response.Errors = new List<string>() { "ID del Topic o User non validi" };
@@ -290,12 +329,12 @@ namespace Web_Api_Forum_Film.Services
                         Data_Creazione = DateTime.Now
                     }
                 };
-                
+
 
                 await _context.Posts.AddAsync(post);
                 await _context.SaveChangesAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response.Post = null;
                 response.Errors = new List<string>() { ex.Message };
@@ -321,7 +360,7 @@ namespace Web_Api_Forum_Film.Services
             {
                 topic.Titolo = request.Titolo;
                 topic.Film = await _context.Films.FirstOrDefaultAsync(f => f.Id == request.IdFilm);
-                
+
                 if (topic.Film == null)
                 {
                     response.Topic = null;
@@ -367,7 +406,7 @@ namespace Web_Api_Forum_Film.Services
                 await _context.Users.AddAsync(user);
                 await _context.SaveChangesAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response.User = null;
                 response.Errors = new List<string>() { ex.Message };
@@ -408,11 +447,11 @@ namespace Web_Api_Forum_Film.Services
                 await (from m in _context.Messaggi
                        select new
                        {
-                          m.Id,
-                          m.Data_Creazione,
-                          m.User,
-                          m.Messaggio,
-                          m.Id_Post
+                           m.Id,
+                           m.Data_Creazione,
+                           m.User,
+                           m.Messaggio,
+                           m.Id_Post
                        }).ToListAsync();
 
                 await _context.SaveChangesAsync();
@@ -421,7 +460,7 @@ namespace Web_Api_Forum_Film.Services
                 response.Success = true;
                 response.Errors = null;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response.Messaggio = null;
                 response.Success = false;
@@ -439,7 +478,7 @@ namespace Web_Api_Forum_Film.Services
             try
             {
                 var topic = await _context.Topics.FirstOrDefaultAsync(t => t.Id == request.IdTopic);
-                if(topic == null)
+                if (topic == null)
                 {
                     response.Topic = null;
                     response.Success = false;
@@ -521,7 +560,7 @@ namespace Web_Api_Forum_Film.Services
             ResponsePostPost response = new ResponsePostPost();
 
             var post = await _context.Posts.FirstOrDefaultAsync(p => p.Id == id);
-            if(post == null)
+            if (post == null)
             {
                 response.Success = false;
                 response.Post = null;
@@ -538,8 +577,8 @@ namespace Web_Api_Forum_Film.Services
                        p.Messaggi
                    }).ToListAsync();
 
-            foreach( Messaggio_Class messaggio in post.Messaggi )
-            {                
+            foreach (Messaggio_Class messaggio in post.Messaggi)
+            {
                 _context.Messaggi.Remove(messaggio);
             }
 
@@ -585,11 +624,6 @@ namespace Web_Api_Forum_Film.Services
             return response;
 
         }
-
-        
-
-
-
 
 
         #endregion

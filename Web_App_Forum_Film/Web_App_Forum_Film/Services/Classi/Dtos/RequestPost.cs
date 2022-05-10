@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace Web_Api_Forum_Film.Services.Class.Dtos
 {
+    public class RequestGetFilms
+    {
+        [Required]
+        public List<Film> ListaFilm { get; set; }
+    }
     public class RequestPost
     {
         [Required]
@@ -43,7 +48,7 @@ namespace Web_Api_Forum_Film.Services.Class.Dtos
         public int IdPost { get; set; }
 
         [Required]
-        public int IdUser { get; set; }
+        public string EmailUser { get; set; }
     }
 
 

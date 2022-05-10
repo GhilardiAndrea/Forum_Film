@@ -16,6 +16,43 @@ namespace Web_App_Forum_Film.Services.Classi
         public static string url = "https://localhost:44360/";
 
         #region GET
+
+        public static async Task<ResponseTopics> GetTopicsFromFilms(RequestGetFilms request)
+        {
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url + "api/Api/topic/films");
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+            try
+            {
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    string json = JsonConvert.SerializeObject(request);
+
+                    streamWriter.Write(json);
+                }
+
+                var httpResponse = (HttpWebResponse)await httpWebRequest.GetResponseAsync();
+                ResponseTopics response;
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+                    response = JsonConvert.DeserializeObject<ResponseTopics>(result);
+                }
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return new ResponseTopics()
+                {
+                    Success = false,
+                    Errors = new List<string>
+                    {
+                        ex.Message
+                    }
+                };
+            }
+        }
+
         public static async Task<ResponseFilms> GetAllFilm()
         {
             HttpClient client = new HttpClient();

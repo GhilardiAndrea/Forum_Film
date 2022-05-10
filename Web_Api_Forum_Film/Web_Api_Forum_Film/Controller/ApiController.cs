@@ -53,6 +53,7 @@ namespace Web_Api_Forum_Film.Controller
             return await _myservice.GetTopicsFromName(name);
         }
 
+
         [HttpGet("topicid/{id}")]
         public async Task<ResponseTopics> GetTopic(int id)
         {
@@ -87,6 +88,12 @@ namespace Web_Api_Forum_Film.Controller
         public async Task<ResponsePostTopic> PostTopic([FromBody] RequestTopic request)
         {
             return await _myservice.PostTopic(request);
+        }
+
+        [HttpPost("topic/films")]
+        public async Task<ResponseTopics> GetTopicsFromFilms([FromBody] RequestGetFilms request)
+        {
+            return await _myservice.GetTopicsFromFilms(request);
         }
 
         [HttpPost("film")]

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Web_Api_Forum_Film.Services.Class;
+using Web_Api_Forum_Film.Services.Class.Dtos;
 using Web_App_Forum_Film.Services.Classi;
 
 namespace Web_App_Forum_Film.Pages
@@ -46,13 +47,37 @@ namespace Web_App_Forum_Film.Pages
         public async Task<IActionResult> OnPost()
         {
             if (String.IsNullOrEmpty(Cerca))
-                return Page();
-            var result = await MyApi.GetTopicsFromName(Cerca);
-            if (result.Success)
+                return Redirect("/Index");
+            var resulttopics = await MyApi.GetTopicsFromName(Cerca);
+            bool z = false;
+            if (resulttopics.Success)
             {
-                ListaCercata = result.List;
-                Success = true;
+                var listatopics = resulttopics.List;
+                ListaCercata = listatopics;
+                z = true;
             }
+
+            var resultfilms = await MyApi.GetFilmsFromName(Cerca);
+            if (resultfilms.Success)
+            {
+                var listafilms = resultfilms.List;
+                var resulttopics2 = await MyApi.GetTopicsFromFilms(new RequestGetFilms() { ListaFilm = listafilms });
+                if(resulttopics2.Success)
+                {
+                    if (z)
+                        ListaCercata.AddRange(resulttopics2.List);
+                    else
+                        ListaCercata = resulttopics2.List;
+                    Success = true;
+                }
+                else
+                {
+                    if (!z)
+                        return Page();
+                    Success = true;
+                }
+            }
+
             return Page();
         }
 

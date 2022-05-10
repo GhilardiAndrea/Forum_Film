@@ -184,7 +184,6 @@ C:\Users\ghilardi.17186\source\repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum
 C:\Users\ghilardi.17186\source\repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
 C:\Users\ghilardi.17186\source\repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\ghilardi.17186\source\repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
-C:\Users\andrea\Source\Repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Web_App_Forum_Film.csprojAssemblyReference.cache
 C:\Users\andrea\Source\Repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Web_App_Forum_Film.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\andrea\Source\Repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Web_App_Forum_Film.AssemblyInfoInputs.cache
 C:\Users\andrea\Source\Repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Web_App_Forum_Film.AssemblyInfo.cs
@@ -381,3 +380,5 @@ C:\Users\ghilardi.17186\Source\Repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum
 C:\Users\ghilardi.17186\Source\Repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Razor\Pages\Crud\Edit.cshtml.g.cs
 C:\Users\ghilardi.17186\Source\Repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Razor\Pages\Crud\Index.cshtml.g.cs
 C:\Users\ghilardi.17186\Source\Repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Razor\Pages\Crud\CreaPost.cshtml.g.cs
+C:\Users\andrea\Source\Repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Razor\Pages\Crud\CreaPost.cshtml.g.cs
+C:\Users\andrea\Source\Repos\Forum_Film\Web_App_Forum_Film\Web_App_Forum_Film\obj\Debug\net5.0\Web_App_Forum_Film.csprojAssemblyReference.cache
