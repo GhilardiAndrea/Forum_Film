@@ -160,7 +160,7 @@ namespace Web_Api_Forum_Film.Services
         {
             ResponseFilms response = new ResponseFilms();
             name = name.Trim().ToLower();
-            var lista = await _context.Films.Where(f => f.Titolo_Originale.ToLower().StartsWith(name)).ToListAsync();
+            var lista = await _context.Films.Where(f => f.Titolo_Originale.ToLower().Contains(name)).ToListAsync();
             await (from f in _context.Films
                    select new
                    {
@@ -223,10 +223,12 @@ namespace Web_Api_Forum_Film.Services
             List<Topic> listafinale = new List<Topic>();
             int num;
             lista = lista.OrderBy(t => t.Id).ToList();
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 30; i++)
             {
                 num = random.Next(lista[0].Id, lista[lista.Count - 1].Id);
-                listafinale.Add(lista[num]);
+                var appoggio = lista.FirstOrDefault(t => t.Id == num);
+                if(appoggio != null)
+                    listafinale.Add(appoggio);
             }
 
             await (from t in _context.Topics
@@ -236,6 +238,8 @@ namespace Web_Api_Forum_Film.Services
                        t.Titolo,
                        t.Film
                    }).ToListAsync();
+
+            listafinale = listafinale.GroupBy(t => t.Id).Select(t => t.First()).ToList();
 
             ResponseTopics response = new ResponseTopics();
 

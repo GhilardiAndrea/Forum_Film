@@ -53,7 +53,7 @@ namespace Web_App_Forum_Film.Pages.Crud
         {
             if (String.IsNullOrEmpty(Cerca))
                 return Page();
-            var response = await MyApi.GetFilmsFromName(Cerca);
+            var response = await MyApi.GetFilmsFromName(Cerca.Trim().ToLower());
             if (response.Success)
                 ListaFilm = response.List;
             return Page();

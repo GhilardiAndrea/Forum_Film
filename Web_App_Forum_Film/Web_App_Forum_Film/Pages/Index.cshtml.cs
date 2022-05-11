@@ -48,7 +48,7 @@ namespace Web_App_Forum_Film.Pages
         {
             if (String.IsNullOrEmpty(Cerca))
                 return Redirect("/Index");
-            var resulttopics = await MyApi.GetTopicsFromName(Cerca);
+            var resulttopics = await MyApi.GetTopicsFromName(Cerca.ToLower().Trim());
             bool z = false;
             if (resulttopics.Success)
             {
@@ -65,7 +65,9 @@ namespace Web_App_Forum_Film.Pages
                 if(resulttopics2.Success)
                 {
                     if (z)
+                    {
                         ListaCercata.AddRange(resulttopics2.List);
+                    }
                     else
                         ListaCercata = resulttopics2.List;
                     Success = true;
@@ -77,7 +79,7 @@ namespace Web_App_Forum_Film.Pages
                     Success = true;
                 }
             }
-
+            ListaCercata = ListaCercata.GroupBy(t => t.Id).Select(t=>t.First()).ToList();
             return Page();
         }
 
