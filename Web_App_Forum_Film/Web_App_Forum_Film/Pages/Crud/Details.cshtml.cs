@@ -74,7 +74,12 @@ namespace Web_App_Forum_Film.Pages.Crud
             if (response.Success)
                 return Redirect($"/Crud/Details?id={Topic.Id}");
             else
+            {
+                if (response.Errors[0] == "Parole non appropriate inserite")
+                    return Redirect("/Crud/ParoleNonAppropriate");
                 return Redirect("/Error");
+            }
+                
         }
     }
 }

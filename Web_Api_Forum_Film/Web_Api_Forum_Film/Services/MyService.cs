@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Web_Api_Forum_Film.Data;
@@ -260,8 +261,24 @@ namespace Web_Api_Forum_Film.Services
 
         public async Task<ResponsePostMessaggio> PostMessaggio(RequestMessaggio request)
         {
+            StreamReader reader = new StreamReader("Parolacce.txt");
+            var ListaParolacce = new List<string>();
+            while(!reader.EndOfStream)
+            {
+                ListaParolacce.Add(reader.ReadLine().ToLower());
+            }
             ResponsePostMessaggio response = new ResponsePostMessaggio();
+            foreach (var parola in ListaParolacce)
+            {
+                if (request.Messaggio.ToLower().Contains(parola))
+                {
+                    response.Messaggio = null;
+                    response.Errors = new List<string>() { "Parole non appropriate inserite" };
+                    response.Success = false;
 
+                    return response;
+                }
+            }
             Messaggio_Class messaggio = new Messaggio_Class();
             try
             {
@@ -311,6 +328,24 @@ namespace Web_Api_Forum_Film.Services
         {
             ResponsePostPost response = new ResponsePostPost();
 
+            StreamReader reader = new StreamReader("Parolacce.txt");
+            var ListaParolacce = new List<string>();
+            while (!reader.EndOfStream)
+            {
+                ListaParolacce.Add(reader.ReadLine().ToLower());
+            }
+            foreach (var parola in ListaParolacce)
+            {
+                if (request.Message.ToLower().Contains(parola))
+                {
+                    response.Post = null;
+                    response.Errors = new List<string>() { "Parole non appropriate inserite" };
+                    response.Success = false;
+
+                    return response;
+                }
+            }
+
             ForumPost post = new ForumPost();
             try
             {
@@ -358,6 +393,24 @@ namespace Web_Api_Forum_Film.Services
         public async Task<ResponsePostTopic> PostTopic(RequestTopic request)
         {
             ResponsePostTopic response = new ResponsePostTopic();
+
+            StreamReader reader = new StreamReader("Parolacce.txt");
+            var ListaParolacce = new List<string>();
+            while (!reader.EndOfStream)
+            {
+                ListaParolacce.Add(reader.ReadLine().ToLower());
+            }
+            foreach (var parola in ListaParolacce)
+            {
+                if (request.Titolo.ToLower().Contains(parola))
+                {
+                    response.Topic = null;
+                    response.Errors = new List<string>() { "Parole non appropriate inserite" };
+                    response.Success = false;
+
+                    return response;
+                }
+            }
 
             Topic topic = new Topic();
             try

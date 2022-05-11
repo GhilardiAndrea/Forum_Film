@@ -47,7 +47,12 @@ namespace Web_App_Forum_Film.Pages.Crud
             if(response.Success)
                 return RedirectToPage("/Index");
             else
+            {
+                if(response.Errors[0] == "Parole non appropriate inserite")
+                    return Redirect("/Crud/ParoleNonAppropriate");
                 return RedirectToPage("/Error");
+            }
+                
         }
         public async Task<IActionResult> OnPostCerca()
         {
