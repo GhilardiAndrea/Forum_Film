@@ -39,7 +39,6 @@ C:\Users\ghilardi.17186\Source\Repos\Forum_Film\Web_Api_Forum_Film\Web_Api_Forum
 C:\Users\ghilardi.17186\Source\Repos\Forum_Film\Web_Api_Forum_Film\Web_Api_Forum_Film\bin\Debug\net5.0\runtimes\win-arm64\native\e_sqlite3.dll
 C:\Users\ghilardi.17186\Source\Repos\Forum_Film\Web_Api_Forum_Film\Web_Api_Forum_Film\bin\Debug\net5.0\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\ghilardi.17186\Source\Repos\Forum_Film\Web_Api_Forum_Film\Web_Api_Forum_Film\bin\Debug\net5.0\runtimes\win-x86\native\e_sqlite3.dll
-C:\Users\ghilardi.17186\Source\Repos\Forum_Film\Web_Api_Forum_Film\Web_Api_Forum_Film\obj\Debug\net5.0\Web_Api_Forum_Film.csprojAssemblyReference.cache
 C:\Users\ghilardi.17186\Source\Repos\Forum_Film\Web_Api_Forum_Film\Web_Api_Forum_Film\obj\Debug\net5.0\Web_Api_Forum_Film.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\ghilardi.17186\Source\Repos\Forum_Film\Web_Api_Forum_Film\Web_Api_Forum_Film\obj\Debug\net5.0\Web_Api_Forum_Film.AssemblyInfoInputs.cache
 C:\Users\ghilardi.17186\Source\Repos\Forum_Film\Web_Api_Forum_Film\Web_Api_Forum_Film\obj\Debug\net5.0\Web_Api_Forum_Film.AssemblyInfo.cs
@@ -112,3 +111,4 @@ C:\Users\andrea\Source\Repos\Forum_Film\Web_Api_Forum_Film\Web_Api_Forum_Film\ob
 C:\Users\andrea\Source\Repos\Forum_Film\Web_Api_Forum_Film\Web_Api_Forum_Film\obj\Debug\net5.0\ref\Web_Api_Forum_Film.dll
 C:\Users\andrea\Source\Repos\Forum_Film\Web_Api_Forum_Film\Web_Api_Forum_Film\obj\Debug\net5.0\Web_Api_Forum_Film.pdb
 C:\Users\andrea\Source\Repos\Forum_Film\Web_Api_Forum_Film\Web_Api_Forum_Film\obj\Debug\net5.0\Web_Api_Forum_Film.genruntimeconfig.cache
+C:\Users\ghilardi.17186\Source\Repos\Forum_Film\Web_Api_Forum_Film\Web_Api_Forum_Film\obj\Debug\net5.0\Web_Api_Forum_Film.csproj.AssemblyReference.cache

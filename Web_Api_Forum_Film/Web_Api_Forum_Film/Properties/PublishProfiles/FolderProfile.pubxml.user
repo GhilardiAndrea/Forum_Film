@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\ghilardi.17186\Source\Repos\Forum_Film\Web_Api_Forum_Film\Web_Api_Forum_Film\bin\Release\net5.0\publish\</_PublishTargetUrl>
+    <History>True|2022-05-12T08:59:33.1381052Z;True|2022-05-12T10:43:52.9851409+02:00;</History>
+  </PropertyGroup>
+</Project>

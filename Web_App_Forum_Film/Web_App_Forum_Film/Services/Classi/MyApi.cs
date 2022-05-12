@@ -13,7 +13,7 @@ namespace Web_App_Forum_Film.Services.Classi
 {
     public class MyApi
     {
-        public static string url = "https://localhost:44360/";
+        public static string url = "http://ApiGhilardi.somee.com/publish/";
 
         #region GET
 
