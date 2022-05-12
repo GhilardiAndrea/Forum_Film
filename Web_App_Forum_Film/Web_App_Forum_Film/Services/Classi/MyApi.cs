@@ -14,6 +14,7 @@ namespace Web_App_Forum_Film.Services.Classi
     public class MyApi
     {
         public static string url = "http://ApiGhilardi.somee.com/publish/";
+        //public static string url = "https://localhost:44360/";
 
         #region GET
 
